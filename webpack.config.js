@@ -33,8 +33,18 @@ module.exports = {
             require('./webpack.config/loaders/typescript'),
             require('./webpack.config/loaders/babel'),
             require('./webpack.config/loaders/file'),
+            {
+                test:/\.js$/,
+                enforce: "pre",
+                use : [{
+                    loader:'source-map-loader'
+                }]
+            }
+            
         ]
     },
+    //rem - add source-map-loader preloader
+    //extract all sourcemaps from libraries and process them in a single map used by webpack in the final build
     devtool: isProd ? 'source-map' : 'eval-source-map',
     devServer:{
         contentBase: output,
